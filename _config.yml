@@ -5,7 +5,7 @@ paginate: 100 # it will paginate after this number
 language: 'zh-cn'
 
 # edit baseurl to simply '/' if using as your personal page (instead of a project page)
-baseurl: /NeoPocketCat/
+baseurl: /
 
 # Website info
 title: NeoPocketCat
@@ -25,7 +25,7 @@ facebook: '' # replace by your username
 
 # Disqus
 disqus: False
-disqus_shortname: jekyller # replace with your disqus username
+disqus_shortname: neo # replace with your disqus username
 
 # Google Analytics
 google_analytics: UA-69281367-1 # replace with your GA tracking identifier
