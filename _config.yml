@@ -62,6 +62,12 @@ feed:
 # repo defaults to USERNAME.github.io
 # Branch defaults to "source" for USERNAME.github.io
 # or "master" otherwise
+safe: False
+lsi: False
+username: NeoPocketCat
+repo: NeoPocketCat.github.io
+branch: master
+relative_source: ./
 
 exclude:
   - assets/css
