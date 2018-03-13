@@ -1,3 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-12T09:51:29+08:00</updated><id>http://localhost:4000/</id><title type="html">NeoPocketCat</title><subtitle>The professional publishing platform</subtitle><entry><title type="html">Wake Up</title><link href="http://localhost:4000/wake-up" rel="alternate" type="text/html" title="Wake Up" /><published>2018-03-11T18:00:00+08:00</published><updated>2018-03-11T18:00:00+08:00</updated><id>http://localhost:4000/wake-up</id><content type="html" xml:base="http://localhost:4000/wake-up">&lt;p&gt;工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-13T09:21:37+08:00</updated><id>http://localhost:4000/</id><title type="html">NeoPocketCat</title><subtitle>The professional publishing platform</subtitle><entry><title type="html">Wake Up</title><link href="http://localhost:4000/wake-up" rel="alternate" type="text/html" title="Wake Up" /><published>2018-03-11T18:00:00+08:00</published><updated>2018-03-11T18:00:00+08:00</updated><id>http://localhost:4000/wake-up</id><content type="html" xml:base="http://localhost:4000/wake-up">&lt;p&gt;工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下&lt;/p&gt;
 
-&lt;h3 id=&quot;那问题来了写博客干啥&quot;&gt;那问题来了，写博客干啥🙄&lt;/h3&gt;</content><author><name>neo</name></author><category term="Getting started" /><summary type="html">工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下</summary></entry></feed>
+&lt;amp-youtube width=&quot;480&quot; height=&quot;270&quot; layout=&quot;responsive&quot; data-videoid=&quot;lBTCB7yLs8Y&quot;&gt;
+&lt;/amp-youtube&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;那问题来了写博客干啥&quot;&gt;那问题来了，写博客干啥🙄&lt;/h3&gt;
+&lt;p&gt;既然不知道为什么写博客，那说一下我为什么不写博客：&lt;strong&gt;懒！&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;没错，懒得写！这几年在公司里转了几次岗，都没有积累下什么很有价值的技术文章，大多数还是比较肤浅的功能。研究过一段时间的iOS CoreGraphic、CoreText、OpenGL ES等等绘图库，也算给公司的表格渲染提供了不错的方案，碾过了各种各样的坑，但是相比起YYKit、cocos2d这一类开源库，感觉自己还是太肤浅，感觉还处在开发水平，没有研发的成就感。以后博客希望能更新一些有意思的组件（或者有趣的小游戏，嘿嘿嘿），&lt;strong&gt;如果有读者，&lt;/strong&gt;希望能给你的学习带来一点点的帮助。&lt;/p&gt;</content><author><name>neo</name></author><category term="Getting started" /><summary type="html">工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下</summary></entry></feed>
