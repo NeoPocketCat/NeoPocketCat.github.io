@@ -68,6 +68,7 @@ username: NeoPocketCat
 repo: NeoPocketCat.github.io
 branch: master
 relative_source: ./
+destination: ./_site/
 
 exclude:
   - assets/css
