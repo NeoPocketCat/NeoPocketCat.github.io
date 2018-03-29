@@ -36,24 +36,5 @@
       </item>
       
     
-      
-      <item>
-        <title>emmmmmmmmmmmmmmm</title>
-        
-          <description>&lt;p&gt;OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄&lt;/p&gt;
-&lt;p&gt;公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）&lt;/p&gt;
-&lt;h2 id=&quot;basictagging&quot;&gt;AtomGraphics&lt;/h2&gt;
-&lt;p&gt;AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。&lt;/p&gt;
-&lt;p&gt;参考的东西很多，什么cocos2d、Webkit、GCanvas。很多人问，我是不是要转行搞游戏，别说，我还真想，什么时候可以把OpenGL或者cocos2d用得够溜了，不求封面上的建模，我就是想搞搞游戏玩玩（顺带一提，封面是凹凸世界）。我怕过几年没成大神，先成大叔了。Damn!&lt;/p&gt;
-&lt;p&gt;路还很漫长，还有很多坑等着我去踩。工程里的代码不定期更新，这是一个孤独的工程😂，还不知道什么时候能写出点成绩，来几个star。&lt;/p&gt;
-</description>
-        
-        <pubDate>Thu, 27 Jul 2017 16:00:00 +0800</pubDate>
-        <link>
-        http://localhost:4000/pull</link>
-        <guid isPermaLink="true">http://localhost:4000/pull</guid>
-      </item>
-      
-    
   </channel>
 </rss>
