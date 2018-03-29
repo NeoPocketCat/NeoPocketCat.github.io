@@ -25,7 +25,7 @@ facebook: '' # replace by your username
 
 # Disqus
 disqus: False
-disqus_shortname: neo # replace with your disqus username
+disqus_shortname: neopocketcat # replace with your disqus username
 
 # Google Analytics
 google_analytics: UA-69281367-1 # replace with your GA tracking identifier
@@ -64,11 +64,13 @@ feed:
 # or "master" otherwise
 safe: False
 lsi: False
-username: NeoPocketCat
-repo: NeoPocketCat.github.io
+username: neopocketcat
+repo: neopocketcat.github.io
 branch: master
 relative_source: ./
 destination: ./_site/
+production_url:  https://neopocketcat.github.io/
+source_url:  https://github.com/NeoPocketCat/NeoPocketCat.github.io/
 
 exclude:
   - assets/css
