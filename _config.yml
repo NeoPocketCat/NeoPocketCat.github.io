@@ -16,6 +16,7 @@ logo_dark: assets/images/favicon.png
 favicon: assets/images/favicon.png
 production_url:  https://neopocketcat.github.io
 source_url:  https://github.com/NeoPocketCat/NeoPocketCat.github.io
+source: ./
 
 # Social info
 navigation: True # show the navbar links
