@@ -69,7 +69,7 @@ lsi: False
 username: neopocketcat
 repo: neopocketcat.github.io
 branch: master
-relative_source: ./
+relative_source: ../
 destination: ./_site/
 
 exclude:
