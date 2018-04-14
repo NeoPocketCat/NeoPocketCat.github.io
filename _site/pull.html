@@ -31,7 +31,7 @@
     <meta property="og:site_name" content="NeoPocketCat" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="emmmmmmmmmmmmmmm" />
-    <meta property="og:description" content="OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄
+    <meta property="og:description" content="OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄
 公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）
 AtomGraphics
 AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。
@@ -47,7 +47,7 @@ AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起�
     <meta property="article:tag" content="New Stage" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="emmmmmmmmmmmmmmm" />
-    <meta name="twitter:description" content="OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄
+    <meta name="twitter:description" content="OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄
 公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）
 AtomGraphics
 AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。
@@ -85,7 +85,7 @@ AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起�
         "@type": "WebPage",
         "@id": "https://neopocketcat.github.io/pull"
     },
-    "description": "OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄
+    "description": "OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄
 公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）
 AtomGraphics
 AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。
@@ -184,7 +184,7 @@ into the {body} of the default.hbs template -->
 
             <section class="post-full-content">
                 <div class="kg-card-markdown">
-                    <p>OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄</p>
+                    <p>OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄</p>
 <p>公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）</p>
 <h2 id="basictagging">AtomGraphics</h2>
 <p>AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。</p>
@@ -216,6 +216,21 @@ into the {body} of the default.hbs template -->
                 <!-- Everything inside the #author tags pulls data from the author -->
                 <!-- #author-->
                 
+                    
+                        <section class="author-card">
+                            
+                                <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
+                            
+                            <section class="author-card-content">
+                                <h4 class="author-card-name"><a href="/author/neo">neo</a></h4>
+                                
+                                    <p>Somebody Somewhere Sometime</p>
+                                
+                            </section>
+                        </section>
+                        <div class="post-full-footer-right">
+                            <a class="author-card-button" href="/author/neo">Read More</a>
+                        </div>
                     
                 
                 <!-- /author  -->
@@ -258,6 +273,8 @@ into the {body} of the default.hbs template -->
                                 
                                 
                                   
+                                
+                                  
                                     
                                   
                                 
@@ -287,6 +304,46 @@ into the {body} of the default.hbs template -->
 
             <!-- If there's a next post, display it using the same markup included from - partials/post-card.hbs -->
             
+                
+    <article class="post-card post-template">
+        
+            <a class="post-card-image-link" href="/webkit">
+                <div class="post-card-image" style="background-image: url(/assets/svg/compass.svg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/webkit">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Webkit</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">WebKit Note</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    <p>## 研究了好几天的WebKit，做一下笔记 ### WebKit流畅渲染动画的实现 WebKit中macOS和iOS实现流畅渲染的方式有点区别 #### macOS 处理时，Canvas中的Context是通过一个叫CGIOSurfaceContextCreate的方法创建，这是创建一个可以加速渲染的Context，为macOS的私有API，iOS没有。而Canvas的Context直接在drawRect方法中被复制到drawRect的Context中。 #### iOS iOS下，Canvas的Context是通过普通的CGBitmapContextCreate方式创建。调试Canvas中可以发现，Canvas的Context不是在drawRect下被渲染上去，而是在RemoteLayerBackingStore的display方法中实现内容的拷贝，具体原理还未知，但是猜测和CATiledLayer有相似的实现。（后续更新） 几个可能重要的API * BackingStoreFlusher::flush() * CGContextFlush * ShareableBitmap * CGBitmapContextCreateWithData **大概原理如下：** 在ShareableBitmap中，会利用公共的data和CGBitmapContextCreateWithData创建一个CGContextRef，并且在上面绘制各种元素，包括Canvas的context(flush之后，可能公共data的数据会变化)。当展示元素的layer需要更新时，是通过上面的ShareableBitmap，利用data创建一个Context，并渲染出CGImage，并把image传给layer.contents layer.contents = (id)m_frontBuffer.bitmap->makeCGImageCopy().get(); 这里context渲染元素、flush、更新layer.contents都在合适的线程上执行，所以估计重点还是在线程资源的合理分配上。下面是监听刷新的线程 m_commitQueue = dispatch_queue_create("com.apple.WebKit.WebContent.RemoteLayerTreeDrawingArea.CommitQueue", nullptr); 以下是flushTimer的设置 void RemoteLayerTreeDrawingArea::scheduleCompositingLayerFlush()</p>
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/neo/">neo</a>
+                        </span>
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+            
 
             <!-- If there's a previous post, display it using the same markup included from - partials/post-card.hbs -->
             
@@ -312,11 +369,6 @@ into the {body} of the default.hbs template -->
                 </header>
                 <section class="post-card-excerpt">
                     <p>开始新的研究方向😂
-
-
-
-
-
 
 X-Platform library for generating 2D animations
 渣渣英文水平，给我憋出了个英文title😂，人生短短几十年，此逼不装何时装

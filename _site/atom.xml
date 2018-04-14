@@ -8,9 +8,30 @@
     
       
       <item>
+        <title>WebKit Note</title>
+        
+          <description>&lt;div id=&quot;canvasWrapper&quot; style=&quot;width: 100%;height: 400px;background: #39474F&quot;&gt;
+    &lt;canvas id=&quot;content&quot;&gt;&lt;/canvas&gt;
+    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var canvasWrapper = document.getElementById('canvasWrapper');
+        var context = document.getElementById('content').getContext('2d');
+
+&lt;/script&gt;&lt;/div&gt;
+</description>
+        
+        <pubDate>Sat, 14 Apr 2018 18:00:00 +0800</pubDate>
+        <link>
+        https://github.com/NeoPocketCat/NeoPocketCat.github.io/webkit</link>
+        <guid isPermaLink="true">https://github.com/NeoPocketCat/NeoPocketCat.github.io/webkit</guid>
+      </item>
+      
+    
+      
+      <item>
         <title>emmmmmmmmmmmmmmm</title>
         
-          <description>&lt;p&gt;OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄&lt;/p&gt;
+          <description>&lt;p&gt;OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄&lt;/p&gt;
 &lt;p&gt;公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）&lt;/p&gt;
 &lt;h2 id=&quot;basictagging&quot;&gt;AtomGraphics&lt;/h2&gt;
 &lt;p&gt;AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。&lt;/p&gt;

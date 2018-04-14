@@ -140,7 +140,7 @@
                 <div class="author-meta">
                     
                     <div class="author-stats">
-                        2 posts <span class="bull">&bull;</span>
+                        4 posts <span class="bull">&bull;</span>
                     </div>
                     
                         <a class="social-link social-link-wb" href="https://neopocketcat.github.io/" target="_blank" rel="noopener"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.5 11.957c0 6.375-5.163 11.544-11.532 11.544C5.599 23.5.5 18.125.5 11.75.5 5.542 5.37.758 11.505.511l.5-.011C18.374.5 23.5 5.582 23.5 11.957zM11.505.511c-6 6.5-6 14.98 0 22.98m1-22.98c6 6.5 6 14.977 0 22.977M2 17.479h20.063m-19.657-12h19.062m-20.968 6h22.938" stroke="#000" stroke-linejoin="round" stroke-miterlimit="10" fill="none"/></svg>
@@ -173,6 +173,88 @@
             
     <article class="post-card author-template">
         
+            <a class="post-card-image-link" href="/webkit">
+                <div class="post-card-image" style="background-image: url(/assets/svg/compass.svg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/webkit">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">Webkit</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">WebKit Note</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    <p>研究了好几天的WebKit，做一下笔记 WebKit流畅渲染动画的实现 WebKit中macOS和iOS实现流畅渲染的方式有点区别 macOS 处理时，Canvas中的Context是通过一个叫CGIOSurfaceContextCreate的方法创建，这是创建一个可以加速渲染的Context，为macOS的私有API，iOS没有。而Canvas的Context直接在drawRect方法中被复制到drawRect的Context中。 iOS iOS下，Canvas的Context是通过普通的CGBitmapContextCreate方式创建。调试Canvas中可以发现，Canvas的Context不是在drawRect下被渲染上去，而是在RemoteLayerBackingStore的display方法中实现内容的拷贝，具体原理还未知，但是猜测和CATiledLayer有相似的实现。（后续更新） 几个可能重要的API BackingStoreFlusher::flush() CGContextFlush ShareableBitmap CGBitmapContextCreateWithData 大概原理如下： 在ShareableBitmap中，会利用公共的data和CGBitmapContextCreateWithData创建一个CGContextRef，并且在上面绘制各种元素，包括Canvas的context(flush之后，可能公共data的数据会变化)。当展示元素的layer需要更新时，是通过上面的ShareableBitmap，利用data创建一个Context，并渲染出CGImage，并把image传给layer.contents layer.contents = (id)m_frontBuffer.bitmap-&gt;makeCGImageCopy().get(); 这里context渲染元素、flush、更新layer.contents都在合适的线程上执行，所以估计重点还是在线程资源的合理分配上。下面是监听刷新的线程 m_commitQueue = dispatch_queue_create("com.apple.WebKit.WebContent.RemoteLayerTreeDrawingArea.CommitQueue", nullptr); 以下是flushTimer的设置 void RemoteLayerTreeDrawingArea::scheduleCompositingLayerFlush() { if (m_isFlushingSuspended) { m_isLayerFlushThrottlingTemporarilyDisabledForInteraction = false; m_hasDeferredFlush</p>
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/neo/">neo</a>
+                        </span>
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+    <article class="post-card author-template">
+        
+            <a class="post-card-image-link" href="/pull">
+                <div class="post-card-image" style="background-image: url(/assets/images/20180329.jpg)"></div>
+            </a>
+        
+        <div class="post-card-content">
+            <a class="post-card-content-link" href="/pull">
+                <header class="post-card-header">
+                    
+                        
+                            
+                                <span class="post-card-tags">New stage</span>
+                            
+                        
+                    
+
+                    <h2 class="post-card-title">emmmmmmmmmmmmmmm</h2>
+                </header>
+                <section class="post-card-excerpt">
+                    <p>OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄
+公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）
+AtomGraphics
+AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。
+参考的东西很多，什么cocos2d、Webkit、GCanvas。很多人问，我是不是要转行搞游戏，别说，我还真想，什么时候可以把OpenGL或者cocos2d用得够溜了，不求封面上的建模，我就是想搞搞游戏玩玩（顺带一提，封面是凹凸世界）。我怕过几年没成大神，先成大叔了。Damn!
+路还很漫长，还有很多坑等着我去踩。工程里的代码不定期更新，这是一个孤独的工程😂，还不知道什么时候能写出点成绩，来几个star。
+</p>
+                </section>
+            </a>
+            <footer class="post-card-meta">
+                
+                    
+                        
+                        <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
+                        
+                        <span class="post-card-author">
+                            <a href="/author/neo/">neo</a>
+                        </span>
+                    
+                
+            </footer>
+        </div>
+    </article>
+
+    <article class="post-card author-template">
+        
             <a class="post-card-image-link" href="/new-stage">
                 <div class="post-card-image" style="background-image: url(/assets/images/writing.jpg)"></div>
             </a>
@@ -192,11 +274,6 @@
                 </header>
                 <section class="post-card-excerpt">
                     <p>开始新的研究方向😂
-
-
-
-
-
 
 X-Platform library for generating 2D animations
 渣渣英文水平，给我憋出了个英文title😂，人生短短几十年，此逼不装何时装
@@ -244,9 +321,6 @@ X-Platform library for generating 2D animations
                 </header>
                 <section class="post-card-excerpt">
                     <p>工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下
-
-
-
 
 
 

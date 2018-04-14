@@ -110,6 +110,47 @@ It's a good idea to keep this template as minimal as possible in terms of both f
     
         <article class="post-card ">
             
+                <a class="post-card-image-link" href="/webkit">
+                    <div class="post-card-image" style="background-image: url(/assets/svg/compass.svg)"></div>
+                </a>
+            
+            <div class="post-card-content">
+                <a class="post-card-content-link" href="/webkit">
+                    <header class="post-card-header">
+                        
+                            
+                                
+                                    <span class="post-card-tags">Webkit</span>
+                                
+                            
+                        
+
+                        <h2 class="post-card-title">WebKit Note</h2>
+                    </header>
+                    <section class="post-card-excerpt">
+                        <p>研究了好几天的WebKit，做一下笔记 WebKit流畅渲染动画的实现 WebKit中macOS和iOS实现流畅渲染的方式有点区别 macOS 处理时，Canvas中的Context是通过一个叫CGIOSurfaceContextCreate的方法创建，这是创建一个可以加速渲染的Context，为macOS的私有API，iOS没有。而Canvas的Context直接在drawRect方法中被复制到drawRect的Context中。 iOS iOS下，Canvas的Context是通过普通的CGBitmapContextCreate方式创建。调试Canvas中可以发现，Canvas的Context不是在drawRect下被渲染上去，而是在RemoteLayerBackingStore的display方法中实现内容的拷贝，具体原理还未知，但是猜测和CATiledLayer有相似的实现。（后续更新） 几个可能重要的API BackingStoreFlusher::flush() CGContextFlush ShareableBitmap CGBitmapContextCreateWithData 大概原理如下： 在ShareableBitmap中，会利用公共的data和CGBitmapContextCreateWithData创建一个CGContextRef，并且在上面绘制各种元素，包括Canvas的context(flush之后，可能公共data的数据会变化)。当展示元素的layer需要更新时，是通过上面的ShareableBitmap，利用data创建一个Context，并渲染出CGImage，并把image传给layer.contents layer.contents = (id)m_frontBuffer.bitmap-&gt;makeCGImageCopy().get(); 这里context渲染元素、flush、更新layer.contents都在合适的线程上执行，所以估计重点还是在线程资源的合理分配上。下面是监听刷新的线程 m_commitQueue = dispatch_queue_create("com.apple.WebKit.WebContent.RemoteLayerTreeDrawingArea.CommitQueue", nullptr); 以下是flushTimer的设置 void RemoteLayerTreeDrawingArea::scheduleCompositingLayerFlush() { if (m_isFlushingSuspended) { m_isLayerFlushThrottlingTemporarilyDisabledForInteraction = false; m_hasDeferredFlush</p>
+                    </section>
+                </a>
+                <footer class="post-card-meta">
+                    
+                        
+                            
+                            <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
+                            
+                            <span class="post-card-author">
+                                <a href="/author/neo/">neo</a>
+                            </span>
+                        
+                    
+                </footer>
+            </div>
+        </article>
+    
+
+    
+    
+        <article class="post-card ">
+            
                 <a class="post-card-image-link" href="/pull">
                     <div class="post-card-image" style="background-image: url(/assets/images/20180329.jpg)"></div>
                 </a>
@@ -128,7 +169,7 @@ It's a good idea to keep this template as minimal as possible in terms of both f
                         <h2 class="post-card-title">emmmmmmmmmmmmmmm</h2>
                     </header>
                     <section class="post-card-excerpt">
-                        <p>OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄
+                        <p>OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄
 公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）
 AtomGraphics
 AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。
@@ -139,6 +180,13 @@ AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起�
                 </a>
                 <footer class="post-card-meta">
                     
+                        
+                            
+                            <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
+                            
+                            <span class="post-card-author">
+                                <a href="/author/neo/">neo</a>
+                            </span>
                         
                     
                 </footer>
@@ -170,11 +218,6 @@ AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起�
                     <section class="post-card-excerpt">
                         <p>开始新的研究方向😂
 
-
-
-
-
-
 X-Platform library for generating 2D animations
 渣渣英文水平，给我憋出了个英文title😂，人生短短几十年，此逼不装何时装
 
@@ -202,55 +245,6 @@ X-Platform library for generating 2D animations
     
 
     
-    
-        <article class="post-card ">
-            
-                <a class="post-card-image-link" href="/wake-up">
-                    <div class="post-card-image" style="background-image: url(/assets/images/welcome.jpg)"></div>
-                </a>
-            
-            <div class="post-card-content">
-                <a class="post-card-content-link" href="/wake-up">
-                    <header class="post-card-header">
-                        
-                            
-                                
-                                    <span class="post-card-tags">Getting started</span>
-                                
-                            
-                        
-
-                        <h2 class="post-card-title">Wake Up</h2>
-                    </header>
-                    <section class="post-card-excerpt">
-                        <p>工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下
-
-
-
-
-
-
-那问题来了，写博客干啥🙄
-既然不知道为什么写博客，那说一下我为什么不写博客：懒！
-
-没错，懒得写！这几年在公司里转了几次岗，都没有积累下什么很有价值的技术文章，大多数还是比较肤浅的功能。研究过一段时间的iOS CoreGraphic、CoreText、OpenGL ES等等绘图库，也算给公司的表格渲染提供了不错的方案，碾过了各种各样的坑，但是相比起YYKit、cocos2d这一类开源库，感觉自己还是太肤浅，感觉还处在开发水平，没有研发的成就感。以后博客希望能更新一些有意思的组件（或者有趣的小游戏，嘿嘿嘿），如果有读者，希望能给你的学习带来一点点的帮助。
-</p>
-                    </section>
-                </a>
-                <footer class="post-card-meta">
-                    
-                        
-                            
-                            <img class="author-profile-image" src="/assets/images/ghost.png" alt="neo" />
-                            
-                            <span class="post-card-author">
-                                <a href="/author/neo/">neo</a>
-                            </span>
-                        
-                    
-                </footer>
-            </div>
-        </article>
     
 
 

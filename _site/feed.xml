@@ -1,14 +1,111 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-03-31T19:05:57+08:00</updated><id>http://localhost:4000/</id><title type="html">NeoPocketCat</title><subtitle>The professional publishing platform</subtitle><entry><title type="html">emmmmmmmmmmmmmmm</title><link href="http://localhost:4000/pull" rel="alternate" type="text/html" title="emmmmmmmmmmmmmmm" /><published>2018-03-29T18:00:00+08:00</published><updated>2018-03-29T18:00:00+08:00</updated><id>http://localhost:4000/pull</id><content type="html" xml:base="http://localhost:4000/pull">&lt;p&gt;OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-04-14T21:34:39+08:00</updated><id>http://localhost:4000/</id><title type="html">NeoPocketCat</title><subtitle>The professional publishing platform</subtitle><entry><title type="html">WebKit Note</title><link href="http://localhost:4000/webkit" rel="alternate" type="text/html" title="WebKit Note" /><published>2018-04-14T18:00:00+08:00</published><updated>2018-04-14T18:00:00+08:00</updated><id>http://localhost:4000/webkit</id><content type="html" xml:base="http://localhost:4000/webkit">&lt;div id=&quot;canvasWrapper&quot; style=&quot;width: 100%;height: 400px;background: #39474F&quot;&gt;
+    &lt;canvas id=&quot;content&quot;&gt;&lt;/canvas&gt;
+    &lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+        var canvasWrapper = document.getElementById('canvasWrapper');
+        var context = document.getElementById('content').getContext('2d');
+
+        var width = canvasWrapper.offsetWidth;
+        var height = canvasWrapper.offsetHeight;
+        var size = d3.min([width, height]);
+
+        d3.select('#content')
+            .attr('width', width + 'px')
+            .attr('height', height + 'px');
+
+        context.lineWidth = 0.4;
+        context.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+
+        var projection = d3.geoOrthographic()
+            .scale(0.45 * size)
+            .translate([0.5 * width, 0.5 * height]);
+
+        var geoGenerator = d3.geoPath()
+            .projection(projection)
+            .context(context);
+
+        var geojson = {type: 'Feature', geometry: {type: 'LineString', coordinates: []}};
+
+        function rndLon() {
+            return -180 + Math.random() * 360;
+        }
+
+        function rndLat() {
+            return -90 + Math.random() * 180;
+        }
+
+        function addPoint() {
+            geojson.geometry.coordinates.push([rndLon(), rndLat()])
+        }
+
+        function update(t) {
+            if (geojson.geometry.coordinates.length &lt; 6000)
+                addPoint();
+
+            projection.rotate([t / 1000]);
+
+            context.clearRect(0, 0, width, height);
+            context.beginPath();
+            geoGenerator(geojson);
+            context.stroke();
+
+            window.requestAnimationFrame(update);
+        }
+
+        window.requestAnimationFrame(update);
+
+    &lt;/script&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;研究了好几天的webkit做一下笔记&quot;&gt;研究了好几天的WebKit，做一下笔记&lt;/h2&gt;
+&lt;h3 id=&quot;webkit流畅渲染动画的实现&quot;&gt;WebKit流畅渲染动画的实现&lt;/h3&gt;
+&lt;p&gt;WebKit中macOS和iOS实现流畅渲染的方式有点区别&lt;/p&gt;
+&lt;h4 id=&quot;macos&quot;&gt;macOS&lt;/h4&gt;
+&lt;p&gt;处理时，Canvas中的Context是通过一个叫CGIOSurfaceContextCreate的方法创建，这是创建一个可以加速渲染的Context，为macOS的私有API，iOS没有。而Canvas的Context直接在drawRect方法中被复制到drawRect的Context中。&lt;/p&gt;
+&lt;h4 id=&quot;ios&quot;&gt;iOS&lt;/h4&gt;
+&lt;p&gt;iOS下，Canvas的Context是通过普通的CGBitmapContextCreate方式创建。调试Canvas中可以发现，Canvas的Context不是在drawRect下被渲染上去，而是在RemoteLayerBackingStore的display方法中实现内容的拷贝，具体原理还未知，但是猜测和CATiledLayer有相似的实现。（后续更新）
+几个可能重要的API&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;BackingStoreFlusher::flush()&lt;/li&gt;
+  &lt;li&gt;CGContextFlush&lt;/li&gt;
+  &lt;li&gt;ShareableBitmap&lt;/li&gt;
+  &lt;li&gt;CGBitmapContextCreateWithData&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;大概原理如下：&lt;/strong&gt;
+在ShareableBitmap中，会利用公共的data和CGBitmapContextCreateWithData创建一个CGContextRef，并且在上面绘制各种元素，包括Canvas的context(flush之后，可能公共data的数据会变化)。当展示元素的layer需要更新时，是通过上面的ShareableBitmap，利用data创建一个Context，并渲染出CGImage，并把image传给layer.contents&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;layer.contents = (id)m_frontBuffer.bitmap-&amp;gt;makeCGImageCopy().get();&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这里context渲染元素、flush、更新layer.contents都在合适的线程上执行，所以估计重点还是在线程资源的合理分配上。下面是监听刷新的线程&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;m_commitQueue = dispatch_queue_create(&quot;com.apple.WebKit.WebContent.RemoteLayerTreeDrawingArea.CommitQueue&quot;, nullptr);&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以下是flushTimer的设置&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;void RemoteLayerTreeDrawingArea::scheduleCompositingLayerFlush()
+{
+    if (m_isFlushingSuspended) {
+        m_isLayerFlushThrottlingTemporarilyDisabledForInteraction = false;
+        m_hasDeferredFlush = true;
+        return;
+    }
+    if (m_isLayerFlushThrottlingTemporarilyDisabledForInteraction) {
+        m_isLayerFlushThrottlingTemporarilyDisabledForInteraction = false;
+        scheduleCompositingLayerFlushImmediately();
+        return;
+    }
+
+    if (m_layerFlushTimer.isActive())
+        return;
+
+    const Seconds initialFlushDelay = 500_ms;
+    const Seconds flushDelay = 1500_ms;
+    Seconds throttleDelay = m_isThrottlingLayerFlushes ? (m_isInitialThrottledLayerFlush ? initialFlushDelay : flushDelay) : 0_s;
+    m_isInitialThrottledLayerFlush = false;
+
+    m_layerFlushTimer.startOneShot(throttleDelay);
+}&lt;/code&gt;&lt;/pre&gt;</content><author><name>neo</name></author><category term="WebKit" /><summary type="html"></summary></entry><entry><title type="html">emmmmmmmmmmmmmmm</title><link href="http://localhost:4000/pull" rel="alternate" type="text/html" title="emmmmmmmmmmmmmmm" /><published>2018-03-29T18:00:00+08:00</published><updated>2018-03-29T18:00:00+08:00</updated><id>http://localhost:4000/pull</id><content type="html" xml:base="http://localhost:4000/pull">&lt;p&gt;OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄&lt;/p&gt;
 &lt;p&gt;公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限）&lt;/p&gt;
 &lt;h2 id=&quot;basictagging&quot;&gt;AtomGraphics&lt;/h2&gt;
 &lt;p&gt;AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。&lt;/p&gt;
 &lt;p&gt;参考的东西很多，什么cocos2d、Webkit、GCanvas。很多人问，我是不是要转行搞游戏，别说，我还真想，什么时候可以把OpenGL或者cocos2d用得够溜了，不求封面上的建模，我就是想搞搞游戏玩玩（顺带一提，封面是凹凸世界）。我怕过几年没成大神，先成大叔了。Damn!&lt;/p&gt;
-&lt;p&gt;路还很漫长，还有很多坑等着我去踩。工程里的代码不定期更新，这是一个孤独的工程😂，还不知道什么时候能写出点成绩，来几个star。&lt;/p&gt;</content><author><name>ghost</name></author><category term="New Stage" /><summary type="html">OpenGL ES, CoreGraphics, Metal2, Canvas 我就是在找虐🙄 公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限） AtomGraphics AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。 参考的东西很多，什么cocos2d、Webkit、GCanvas。很多人问，我是不是要转行搞游戏，别说，我还真想，什么时候可以把OpenGL或者cocos2d用得够溜了，不求封面上的建模，我就是想搞搞游戏玩玩（顺带一提，封面是凹凸世界）。我怕过几年没成大神，先成大叔了。Damn! 路还很漫长，还有很多坑等着我去踩。工程里的代码不定期更新，这是一个孤独的工程😂，还不知道什么时候能写出点成绩，来几个star。</summary></entry><entry><title type="html">New Stage</title><link href="http://localhost:4000/new-stage" rel="alternate" type="text/html" title="New Stage" /><published>2018-03-18T01:00:00+08:00</published><updated>2018-03-18T01:00:00+08:00</updated><id>http://localhost:4000/new-stage</id><content type="html" xml:base="http://localhost:4000/new-stage">&lt;p&gt;开始新的研究方向😂&lt;/p&gt;
-
-&lt;amp-youtube width=&quot;480&quot; height=&quot;270&quot; layout=&quot;responsive&quot; data-videoid=&quot;lBTCB7yLs8Y&quot;&gt;
-&lt;/amp-youtube&gt;
-
-&lt;hr /&gt;
+&lt;p&gt;路还很漫长，还有很多坑等着我去踩。工程里的代码不定期更新，这是一个孤独的工程😂，还不知道什么时候能写出点成绩，来几个star。&lt;/p&gt;</content><author><name>neo</name></author><category term="New Stage" /><summary type="html">OpenGL ES, CoreGraphics, Metal, Skia 我就是在找虐🙄 公司开发的移动端图表是H5图表，但是由于种种原因，很可能会出现一次要展示多个WebView的情况，那就可能会看到一个一个图表慢慢的加载出来（我们测试用机的配置没有下限） AtomGraphics AtomGraphics， 我最初的目的是开发一款跨平台的绘图SDK，听起来像是cocos2d。没错，雏形就是参考这个。但是cocos2d用的是OpenGL，我想找死，能画图的库都想用一遍。私をドMと勘違いしないで、本当に違いです。 参考的东西很多，什么cocos2d、Webkit、GCanvas。很多人问，我是不是要转行搞游戏，别说，我还真想，什么时候可以把OpenGL或者cocos2d用得够溜了，不求封面上的建模，我就是想搞搞游戏玩玩（顺带一提，封面是凹凸世界）。我怕过几年没成大神，先成大叔了。Damn! 路还很漫长，还有很多坑等着我去踩。工程里的代码不定期更新，这是一个孤独的工程😂，还不知道什么时候能写出点成绩，来几个star。</summary></entry><entry><title type="html">New Stage</title><link href="http://localhost:4000/new-stage" rel="alternate" type="text/html" title="New Stage" /><published>2018-03-18T01:00:00+08:00</published><updated>2018-03-18T01:00:00+08:00</updated><id>http://localhost:4000/new-stage</id><content type="html" xml:base="http://localhost:4000/new-stage">&lt;p&gt;开始新的研究方向😂&lt;/p&gt;
 
 &lt;h3 id=&quot;x-platform-library-for-generating-2d-animations&quot;&gt;X-Platform library for generating 2D animations&lt;/h3&gt;
 &lt;p&gt;渣渣英文水平，给我憋出了个英文title😂，人生短短几十年，此逼不装何时装&lt;/p&gt;
@@ -16,9 +113,6 @@
 &lt;p&gt;简单说就是，为了发展原生图表，将图表的流畅性、动画效果发展到极致，我毅然决定开发原生绘图API（不要问我为什么WebView的H5图表不够好，单纯显示图表上，WebView还是干了不少多余的事，体量庞大）。这个搞完我是不是可以转行搞游戏引擎了😏？&lt;/p&gt;
 
 &lt;p&gt;先从cocos2d开始吧，路还很长&lt;/p&gt;</content><author><name>neo</name></author><category term="New Stage" /><summary type="html">开始新的研究方向😂</summary></entry><entry><title type="html">Wake Up</title><link href="http://localhost:4000/wake-up" rel="alternate" type="text/html" title="Wake Up" /><published>2018-03-11T18:00:00+08:00</published><updated>2018-03-11T18:00:00+08:00</updated><id>http://localhost:4000/wake-up</id><content type="html" xml:base="http://localhost:4000/wake-up">&lt;p&gt;工作这么多年，都没有想过要写博客，花了大半天时间总算是搭建起来了，mark一下&lt;/p&gt;
-
-&lt;amp-youtube width=&quot;480&quot; height=&quot;270&quot; layout=&quot;responsive&quot; data-videoid=&quot;lBTCB7yLs8Y&quot;&gt;
-&lt;/amp-youtube&gt;
 
 &lt;hr /&gt;
 
